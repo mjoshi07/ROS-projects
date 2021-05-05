@@ -211,12 +211,12 @@ include_directories(
 add_executable(talker_node src/talker/talker.cpp)
 target_link_libraries(talker_node ${catkin_LIBRARIES})
 
-
 # listener
 add_executable(listener_node src/listener/listener.cpp)
 target_link_libraries(listener_node ${catkin_LIBRARIES})
 
-# turtleBot_move
+
+# turtleBot_moveStaright
 add_executable(turtleBot_moveStraight src/turtleSim/moveStraight.cpp)
 target_link_libraries(turtleBot_moveStraight ${catkin_LIBRARIES})
 
@@ -227,3 +227,15 @@ target_link_libraries(turtleBot_rotate ${catkin_LIBRARIES})
 # turtleBot_move2Location
 add_executable(turtleBot_move2Location src/turtleSim/move2Location.cpp)
 target_link_libraries(turtleBot_move2Location ${catkin_LIBRARIES})
+
+# turtleBot_move2Home
+add_executable(turtleBot_move2Home src/turtleSim/move2Home.cpp)
+target_link_libraries(turtleBot_move2Home ${catkin_LIBRARIES})
+
+# turtleBot_gridMotion
+add_executable(turtleBot_gridMotion src/turtleSim/gridMotion.cpp)
+target_link_libraries(turtleBot_gridMotion ${catkin_LIBRARIES})
+
+# turtleBot_spiralMotion
+add_executable(turtleBot_spiralMotion src/turtleSim/spiralMotion.cpp)
+target_link_libraries(turtleBot_spiralMotion ${catkin_LIBRARIES})
