@@ -108,8 +108,7 @@ void setDesiredOrientation (double desired_angle_radians)
 {
 	double relative_angle_radians = desired_angle_radians - turtlesim_pose.theta;
 	bool clockwise = ((relative_angle_radians<0)?true:false);
-	// rotate(10, radians2degrees(abs(relative_angle_radians)), clockwise);
-	rotate(10, radians2degrees(relative_angle_radians), clockwise);
+	rotate(10, radians2degrees(abs(relative_angle_radians)), clockwise);
 }
 
 void move2Location(turtlesim::Pose  locationPose, double distTolerance)
