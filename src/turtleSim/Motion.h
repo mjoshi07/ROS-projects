@@ -14,6 +14,13 @@ const double y_max = 11.0;
 
 const double PI = 3.14159265359;
 
+void poseCallback(const turtlesim::Pose::ConstPtr & pose_message)
+{
+	turtlesim_pose.x = pose_message->x;
+	turtlesim_pose.y = pose_message->y;
+	turtlesim_pose.theta = pose_message->theta;
+}
+
 double degrees2radians(double angle_in_degrees)
 {
     return angle_in_degrees * (PI / 180.0);
@@ -81,22 +88,22 @@ void rotate(double angularSpeedInDegrees, double relativeAngleInDegrees, bool is
 
     if(isClockwise)
     {
-        vel_msg.angular.z = abs(angularSpeed);
+        vel_msg.angular.z = -abs(angularSpeed);
     }
     else
     {
-        vel_msg.angular.z = -abs(angularSpeed);
+        vel_msg.angular.z = abs(angularSpeed);
     }
 
-    double current_angle = 0.0;
+    double current_angle_in_degrees = 0.0;
     double start_time = ros::Time::now().toSec();
-    ros::Rate loop_rate(100);
+    ros::Rate loop_rate(10);
 
-    while(current_angle<relativeAngle)
+    while(current_angle_in_degrees<relativeAngleInDegrees)
     {
         velocity_publisher.publish(vel_msg);
         double end_time = ros::Time::now().toSec();
-        current_angle = angularSpeed*(end_time - start_time);
+        current_angle_in_degrees = angularSpeedInDegrees*(end_time - start_time);
         ros::spinOnce();
         loop_rate.sleep();
     }
@@ -104,11 +111,11 @@ void rotate(double angularSpeedInDegrees, double relativeAngleInDegrees, bool is
     velocity_publisher.publish(vel_msg);
 }
 
-void setDesiredOrientation (double desired_angle_radians)
+void setDesiredOrientation (double desired_angle_degrees)
 {
-	double relative_angle_radians = desired_angle_radians - turtlesim_pose.theta;
+	double relative_angle_radians = degrees2radians(desired_angle_degrees) - turtlesim_pose.theta;
 	bool clockwise = ((relative_angle_radians<0)?true:false);
-	rotate(10, radians2degrees(abs(relative_angle_radians)), clockwise);
+	rotate(3, radians2degrees(abs(relative_angle_radians)), clockwise);
 }
 
 void move2Location(turtlesim::Pose  locationPose, double distTolerance)
@@ -144,7 +151,7 @@ void move2Location(turtlesim::Pose  locationPose, double distTolerance)
 	vel_msg.angular.z = 0;
 	velocity_publisher.publish(vel_msg);
 
-	setDesiredOrientation(locationPose.theta);
+	setDesiredOrientation(radians2degrees(locationPose.theta));
 }
 
 void gridMotion()
@@ -217,11 +224,4 @@ void spiralMotion()
 	}while((turtlesim_pose.x<10.5)&&(turtlesim_pose.y<10.5));
 	vel_msg.linear.x =0;
 	velocity_publisher.publish(vel_msg);
-}
-
-void poseCallback(const turtlesim::Pose::ConstPtr & pose_message)
-{
-	turtlesim_pose.x = pose_message->x;
-	turtlesim_pose.y = pose_message->y;
-	turtlesim_pose.theta = pose_message->theta;
 }
