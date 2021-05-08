@@ -3,9 +3,9 @@ This repository contains some basic ROS projects
 
 
 ## Dependencies
-* ROS (I have used ROS-Neotic but instructions are same for other versions as well)
-* Ubuntu (20.04 for ROS Neotic)
-* OpenCV (4.0.0 and above is supported by ROS Neotic, earlier versions of ROS support older versions of OpenCV) **[OPTIONAL]**
+* ROS (I have used ROS-Noetic but instructions are same for other versions as well)
+* Ubuntu (20.04 for ROS Noetic)
+* OpenCV (4.0.0 and above is supported by ROS Noetic, earlier versions of ROS support older versions of OpenCV) **[OPTIONAL]**
 
 ## Working
 * Install ROS by following the guide: _http://wiki.ros.org/noetic/Installation_
