@@ -8,11 +8,13 @@ project(ros_basics)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-  std_msgs
-  geometry_msgs
-  turtlesim
+roscpp
+rospy
+std_msgs
+actionlib_msgs
+cv_bridge
+image_transport
+message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -105,10 +107,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES ros_basics
-#  CATKIN_DEPENDS roscpp rospy std_msgs
-#  DEPENDS system_lib
+  INCLUDE_DIRS include
+  LIBRARIES ros_basics
+  CATKIN_DEPENDS roscpp rospy std_msgs
+  # DEPENDS system_lib
 )
 
 ###########
@@ -120,6 +122,7 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -207,6 +210,10 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
+
+####################CMAKE MODIFICATIONS FOR ROS PROJECTS######################################
+
+
 # talker
 add_executable(talker_node src/talker/talker.cpp)
 target_link_libraries(talker_node ${catkin_LIBRARIES})
@@ -214,6 +221,7 @@ target_link_libraries(talker_node ${catkin_LIBRARIES})
 # listener
 add_executable(listener_node src/listener/listener.cpp)
 target_link_libraries(listener_node ${catkin_LIBRARIES})
+
 
 
 # turtleBot_moveStaright
@@ -239,3 +247,22 @@ target_link_libraries(turtleBot_gridMotion ${catkin_LIBRARIES})
 # turtleBot_spiralMotion
 add_executable(turtleBot_spiralMotion src/turtleSim/spiralMotion.cpp)
 target_link_libraries(turtleBot_spiralMotion ${catkin_LIBRARIES})
+
+
+
+# perception_readVideo
+find_package(OpenCV)
+include_directories(${OpenCV_INCLUDE_DIRS})
+add_executable(readVideo src/perception/readVideo.cpp)
+target_link_libraries(readVideo ${OpenCV_LIBRARIES})
+
+# perception_subscribeImg
+add_executable(imgSub src/perception/imgSub.cpp)
+target_link_libraries(imgSub ${catkin_LIBRARIES})
+target_link_libraries(imgSub ${OpenCV_LIBRARIES})
+
+# perception_publisherImg
+add_executable(imgPub src/perception/imgPub.cpp)
+target_link_libraries(imgPub ${catkin_LIBRARIES})
+target_link_libraries(imgPub ${OpenCV_LIBRARIES})
+
