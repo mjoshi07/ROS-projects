@@ -17,7 +17,11 @@ catkin_create_pkg ros_basics std_msgs rospy roscpp
 ```
 catkin_make
 ```
-* Run the different application, as of now the following are available
+* First start ROS master
+```
+roscore
+```
+* Run the different applications, as of now the following are available:
 ```
 rosrun ros_basics talker_node
 ```
@@ -25,10 +29,11 @@ rosrun ros_basics talker_node
 rosrun ros_basics listener_node
 ```
 
-* Before running the turtleBot motion applications, run the turtlesim application
+* Run the turtlesim application
 ```
 rosrun turtlesim turtlesim_node
 ```
+* TurtleBot motion applications:
 ```
 rosrun ros_basics turtleBot_moveStraight
 ```
@@ -47,4 +52,14 @@ rosrun ros_basics turtleBot_gridMotion
 ```
 ```
 rosrun ros_basics turtleBot_spiralMotion
+```
+* ROS-OpenCV, publish and subscribe an image, can be used to stream(publish) videos as well
+```
+rosrun ros_basics image_publisher
+```
+```
+rosrun ros_basics image_subscriber
+```
+```
+rosrun ros_basics readVideo
 ```
