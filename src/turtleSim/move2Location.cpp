@@ -7,11 +7,11 @@ int main(int argc, char** argv)
 	ros::NodeHandle n;
 	turtlesim::Pose pose;
 	
-	std::cout<<"Enter x coordinate: \t";
+	std::cout<<"Enter x coordinate (type-double): \t";
 	std::cin>>pose.x;
-	std::cout<<"Enter y coordinate: \t";
+	std::cout<<"Enter y coordinate (type-double): \t";
 	std::cin>>pose.y;
-	std::cout<<"Enter theta: \t";
+	std::cout<<"Enter theta (tpye-double): \t";
 	std::cin>>pose.theta;
 
 	velocity_publisher = n.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 1000);
