@@ -248,28 +248,30 @@ add_executable(turtleBot_spiralMotion src/turtleSim/spiralMotion.cpp)
 target_link_libraries(turtleBot_spiralMotion ${catkin_LIBRARIES})
 
 
-# opencv DIRS
+
+# OpenCV DIRS
 find_package(OpenCV)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-# perception_readVideo
+# perception_cv_readVideo
 add_executable(readVideo src/perception/cv/readVideo.cpp)
 target_link_libraries(readVideo ${OpenCV_LIBRARIES})
 
-# perception_subscribeImg
+# perception_cv_subscribeImg
 add_executable(imgSub src/perception/cv/imgSub.cpp)
 target_link_libraries(imgSub ${catkin_LIBRARIES})
 target_link_libraries(imgSub ${OpenCV_LIBRARIES})
 
-# perception_publisherImg
+# perception_pcv_ublisherImg
 add_executable(imgPub src/perception/cv/imgPub.cpp)
 target_link_libraries(imgPub ${catkin_LIBRARIES})
 target_link_libraries(imgPub ${OpenCV_LIBRARIES})
 
-# perception_subscriberLaserScanner
+# perception_laserScanner_subscriber
 add_executable(scanSub src/perception/laser/scanSub.cpp)
 target_link_libraries(scanSub ${catkin_LIBRARIES})
 
-# perception_LaserScanner_ObstacleAvoidance
-# add_executable(obstacle_avoidance src/perception/laser/Obstacle_avoider.cpp)
-# target_link_libraries(obstacle_avoidance ${catkin_LIBRARIES})
+# perception_laser_obstacleAvoidance
+add_executable(obstacleAvoider src/perception/laser/ObstacleAvoider.cpp)
+target_link_libraries(obstacleAvoider ${catkin_LIBRARIES})
+
