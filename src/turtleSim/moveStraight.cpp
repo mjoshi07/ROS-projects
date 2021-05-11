@@ -8,9 +8,10 @@ int main(int argc, char **argv)
 	double distance = 10;;
 	bool isForward = false;
 
-	std::cout<<"Enter speed: \t";
+
+	std::cout<<"Enter speed (type-double): \t";
 	std::cin>>speed;
-	std::cout<<"Enter distance: \t";
+	std::cout<<"Enter distance (type-double): \t";
 	std::cin>>distance;
 
 	bool noValueReceived = false;
@@ -31,7 +32,6 @@ int main(int argc, char **argv)
 			std::cout<<"Enter 1 or 0 only, Tries left "<<i<<'\n';
 			noValueReceived = true;
 		}
-		i++;
 	}
 	if(noValueReceived)
 	{
