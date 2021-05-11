@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(ros_basics)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-#add_compile_options(-std=c++11)
+add_compile_options(-std=c++17)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -249,23 +249,28 @@ add_executable(turtleBot_spiralMotion src/turtleSim/spiralMotion.cpp)
 target_link_libraries(turtleBot_spiralMotion ${catkin_LIBRARIES})
 
 
-
-# perception_readVideo
+# opencv DIRS
 find_package(OpenCV)
 include_directories(${OpenCV_INCLUDE_DIRS})
-add_executable(readVideo src/perception-cv/readVideo.cpp)
+
+# perception_readVideo
+add_executable(readVideo src/perception/cv/readVideo.cpp)
 target_link_libraries(readVideo ${OpenCV_LIBRARIES})
 
 # perception_subscribeImg
-add_executable(imgSub src/perception-cv/imgSub.cpp)
+add_executable(imgSub src/perception/cv/imgSub.cpp)
 target_link_libraries(imgSub ${catkin_LIBRARIES})
 target_link_libraries(imgSub ${OpenCV_LIBRARIES})
 
 # perception_publisherImg
-add_executable(imgPub src/perception-cv/imgPub.cpp)
+add_executable(imgPub src/perception/cv/imgPub.cpp)
 target_link_libraries(imgPub ${catkin_LIBRARIES})
 target_link_libraries(imgPub ${OpenCV_LIBRARIES})
 
-#perception_subscriberLaserScanner
-add_executable(scanSub src/perception-laser/scanSub.cpp)
+# perception_subscriberLaserScanner
+add_executable(scanSub src/perception/laser/scanSub.cpp)
 target_link_libraries(scanSub ${catkin_LIBRARIES})
+
+# perception_LaserScanner_ObstacleAvoidance
+# add_executable(obstacle_avoidance src/perception/laser/Obstacle_avoider.cpp)
+# target_link_libraries(obstacle_avoidance ${catkin_LIBRARIES})
