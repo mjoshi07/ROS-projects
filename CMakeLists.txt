@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(ros_basics)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++17)
+#add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -215,11 +215,11 @@ include_directories(
 
 
 # talker
-add_executable(talker_node src/talker/talker.cpp)
+add_executable(talker_node src/talker_listener/talker.cpp)
 target_link_libraries(talker_node ${catkin_LIBRARIES})
 
 # listener
-add_executable(listener_node src/listener/listener.cpp)
+add_executable(listener_node src/talker_listener/listener.cpp)
 target_link_libraries(listener_node ${catkin_LIBRARIES})
 
 
