@@ -63,3 +63,7 @@ rosrun ros_basics image_subscriber
 ```
 rosrun ros_basics readVideo
 ```
+* LaserScanner, scan laser data and print it
+```
+rosrun ros_basics scanSub
+```
