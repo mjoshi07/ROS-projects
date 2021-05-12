@@ -63,7 +63,10 @@ rosrun ros_basics image_subscriber
 ```
 rosrun ros_basics readVideo
 ```
-* LaserScanner, scan laser data and print it
+* LaserScanner, scan data and print it, obstacle avoider robot
 ```
 rosrun ros_basics scanSub
+```
+```
+rosrun ros_basics obstacleAvoider
 ```
