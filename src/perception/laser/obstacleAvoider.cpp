@@ -57,7 +57,7 @@ int main(int argc, char** argv)
     
     geometry_msgs::Twist vel_msg;
 
-    ros::Rate loop(10);
+    ros::WallRate loop(10);
 
     while(ros::ok())
     {
