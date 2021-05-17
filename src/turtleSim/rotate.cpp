@@ -8,11 +8,11 @@ int main(int argc, char** argv)
 	double relativeAngleInDegrees = 90.0;
 	bool isClockwise = true;
 
-	std::cout<<"Enter angular speed (type-double): \t";
+	std::cout<<"Enter angular speed: \t";
 	std::cin>>angularSpeedInDegrees;
-	std::cout<<"\nEnter relative angle (type-double): \t";
+	std::cout<<"\nEnter relative angle (degrees): \t";
 	std::cin>>relativeAngleInDegrees;
-	std::cout<<"\nEnter 1 to rotate clockwise or 0 to rotate counter-clockwise: \t";
+	std::cout<<"\nEnter 1 to rotate clockwise, 0 to rotate counter-clockwise: \t";
 	int direction;
 	std::cin>>direction;
 	isClockwise = direction?true:false;
