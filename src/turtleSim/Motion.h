@@ -149,6 +149,8 @@ void move2Location(turtlesim::Pose  locationPose, double distTolerance)
 	vel_msg.angular.z = 0;
 	velocity_publisher.publish(vel_msg);
 
+	setDesiredOrientation(radians2degrees(locationPose.theta));
+
 }
 
 void gridMotion()
