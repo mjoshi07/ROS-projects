@@ -11,8 +11,10 @@ int main(int argc, char** argv)
 	std::cin>>pose.x;
 	std::cout<<"Enter y coordinate (type-double): \t";
 	std::cin>>pose.y;
-	std::cout<<"Enter theta (tpye-double): \t";
-	std::cin>>pose.theta;
+	std::cout<<"Enter theta in degrees (type-double): \t";
+	double tempThetaInDegrees;
+	std::cin>>tempThetaInDegrees;
+	pose.theta = degrees2radians(tempThetaInDegrees);
 
 	velocity_publisher = n.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 1000);
 	pose_subscriber = n.subscribe("/turtle1/pose", 10, poseCallback);
