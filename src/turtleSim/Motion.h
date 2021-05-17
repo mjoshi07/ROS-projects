@@ -21,6 +21,14 @@ void poseCallback(turtlesim::Pose pose_message)
 	turtlesim_pose.theta = pose_message.theta;
 }
 
+void checkForExcessRotation(double& angle_in_degrees)
+{
+	while(angle_in_degrees >= 360)
+	{
+		angle_in_degrees -= 360;
+	}
+}
+
 double degrees2radians(double angle_in_degrees)
 {
     return angle_in_degrees * (PI / 180.0);
@@ -70,6 +78,8 @@ void moveStraight(double linearSpeed, double distance, bool isForward)
 
 void rotate(double angularSpeedInDegrees, double relativeAngleInDegrees, bool isClockwise)
 {
+	checkForExcessRotation(relativeAngleInDegrees);
+
     double angularSpeed = degrees2radians(angularSpeedInDegrees);
     double relativeAngle = degrees2radians(relativeAngleInDegrees);
     geometry_msgs::Twist vel_msg;
@@ -110,10 +120,12 @@ void rotate(double angularSpeedInDegrees, double relativeAngleInDegrees, bool is
 }
 
 void setDesiredOrientation (double desired_angle_degrees)
-{
+{	
+	checkForExcessRotation(desired_angle_degrees);
+
 	double relative_angle_radians = degrees2radians(desired_angle_degrees) - turtlesim_pose.theta;
 	bool clockwise = ((relative_angle_radians<0)?true:false);
-	rotate(10, radians2degrees(abs(relative_angle_radians)), clockwise);
+	rotate(30, radians2degrees(abs(relative_angle_radians)), clockwise);
 }
 
 void move2Location(turtlesim::Pose  locationPose, double distTolerance)
