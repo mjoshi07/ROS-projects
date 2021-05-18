@@ -1,7 +1,3 @@
-# ROS-projects
-This repository contains some basic ROS projects
-
-
 ## Dependencies
 * ROS (I have used ROS-Noetic but instructions are same for other versions as well)
 * Ubuntu (20.04 for ROS Noetic)
