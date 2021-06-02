@@ -41,20 +41,18 @@ void scan_callback(sensor_msgs::LaserScan LaserScanMsg)
     int end_index = 315;
     int min_index_angle = -1;
 
-    int counter(0);
     for(int i = 0; i < LaserScanMsg.ranges.size() ; i++)
     {
         if(!std::isnan(LaserScanMsg.ranges[i]) && (i<=start_index || i>= end_index))
         {
             if(LaserScanMsg.ranges[i] < global_min_distance && (LaserScanMsg.ranges[i]>= LaserScanMsg.range_min) && (LaserScanMsg.ranges[i]<= LaserScanMsg.range_max))
             {
-                counter++;
                 global_min_distance = LaserScanMsg.ranges[i];
                 min_index_angle = i;
             }
         }
     }
-    if(!counter)
+    if(min_index_angle != -1)
     {
         global_min_distance = 9999.9;
         if(min_index_angle<=45)
