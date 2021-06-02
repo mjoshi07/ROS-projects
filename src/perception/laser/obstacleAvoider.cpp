@@ -12,11 +12,11 @@ const double obstacle_angular_vel = 1.5;
 const double obstacle_linear_vel = -0.07;
 const double OBSTACLE_MIN_DIST = 0.7;
 double global_min_distance = 99999.99;
+bool rotateClockwise=true;
 
 double radian2degree(double angle_in_radians);
 void scan_callback(sensor_msgs::LaserScan scanMessage);
 void start_moving();
-
 
 int main(int argc, char** argv)
 {
@@ -39,20 +39,33 @@ void scan_callback(sensor_msgs::LaserScan LaserScanMsg)
     // Since 0 is in the center, we want to scan the area sweeped between 45 degrees and 315 degrees for obstacles
     int start_index = 45;
     int end_index = 315;
-    int min_index = -1;
+    int min_index_angle = -1;
 
+    int counter(0);
     for(int i = 0; i < LaserScanMsg.ranges.size() ; i++)
     {
         if(!std::isnan(LaserScanMsg.ranges[i]) && (i<=start_index || i>= end_index))
         {
-            if((LaserScanMsg.ranges[i]>= LaserScanMsg.range_min) && (LaserScanMsg.ranges[i]<= LaserScanMsg.range_max))
+            if(LaserScanMsg.ranges[i] < global_min_distance && (LaserScanMsg.ranges[i]>= LaserScanMsg.range_min) && (LaserScanMsg.ranges[i]<= LaserScanMsg.range_max))
             {
-                min_index = i;
-                break;
+                counter++;
+                global_min_distance = LaserScanMsg.ranges[i];
+                min_index_angle = i;
             }
         }
     }
-    global_min_distance = (min_index != -1)?LaserScanMsg.ranges[min_index]:0.1;   
+    if(!counter)
+    {
+        global_min_distance = 9999.9;
+        if(min_index_angle<=45)
+        {
+            rotateClockwise = false;
+        }
+        else if(min_index_angle>=315)
+        {
+            rotateClockwise = true;
+        }
+    } 
 }
 
 void start_moving()
