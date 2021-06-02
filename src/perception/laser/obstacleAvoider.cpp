@@ -8,7 +8,7 @@ ros::Subscriber laser_scan_subscriber;
 
 const double PI = 3.14159265359;
 const double normal_linear_vel = 0.4;
-const double obstacle_angular_vel = 1.5;
+const double obstacle_angular_vel = .5;
 const double obstacle_linear_vel = -0.07;
 const double OBSTACLE_MIN_DIST = 0.7;
 double global_min_distance = 99999.99;
@@ -40,6 +40,7 @@ void scan_callback(sensor_msgs::LaserScan LaserScanMsg)
     int start_index = 45;
     int end_index = 315;
     int min_index_angle = -1;
+    int counter(0);
 
     for(int i = 0; i < LaserScanMsg.ranges.size() ; i++)
     {
@@ -49,10 +50,11 @@ void scan_callback(sensor_msgs::LaserScan LaserScanMsg)
             {
                 global_min_distance = LaserScanMsg.ranges[i];
                 min_index_angle = i;
+                counter++;
             }
         }
     }
-    if(min_index_angle != -1)
+    if(!counter)
     {
         global_min_distance = 9999.9;
         if(min_index_angle<=45)
@@ -80,7 +82,7 @@ void start_moving()
         }
         else
         {
-            vel_msg.linear.x = obstacle_linear_vel;
+            vel_msg.linear.x = 0;
             vel_msg.angular.z = obstacle_angular_vel;
         }
 
